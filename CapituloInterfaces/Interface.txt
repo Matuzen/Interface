@@ -1,0 +1,55 @@
+Serviço - tipo de classe
+
+Camada de domínio: camadas do meu negócio/entidades
+
+- CarRental - Aluguel de Carro
+.data de empréstimo
+.data de devolução
+	.está associado a classe veículo (Vehicle)
+	.está associado a nota de pagamento (Invoice)
+
+- Vehicle
+.modelo
+
+- Invoice
+.valor básico de pagamento
+.valor do imposto
+.pagamento total - atributo calculado
+
+Camada de serviço: serviços que realizam operações do meu negócio
+
+- RentalService - Serviço de Aluguel - tem uma dependência serviço de impostos do Brasil (BrazilTaxService)
+.valor por hora
+.valor por dia
+.processInvoice: gerar a nota de pagamento (Invoice)
+
+- BrazilTaxService
+.taxa de imposto - retorna o imposto de um dado valor
+	.composição de serviços onde um depende do outro 
+		.RentalService => BrazilTaxService
+
+
+
+PASSO A PASSO
+
+1° Criar a pasta Entities 
+2° Criar as classes Invoice e Vehicle
+	.Na classe Invoice tem uma propriedade calculada: BasicPayment
+	.Nessa propriedade abrir uma chave para o get ficar dentro da chave e na frente do get abrir outra chave e colocar o return 
+	.Faça o ToString na classe Invoice
+3° Criar a classe CarRental
+	.Fazer a Associação com Vehicle e Invoice
+	.No construtor deixar o invoice de fora, pois a nota de pagamento só é gerada quando mandar processar o alugel de carro
+4° Implementar a interação com o usuário
+	.Na parte do DateTime chame esse método: DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+	.Ler a data no formato desejado, A string que o usuário digitar vai ser convertida (Console.ReadLine), formato, Se nao tiver o CultureInfo vai dar erro
+5° Instanciar o Aluguel de Carro (CarRental) já associado com o objeto Vehicle
+6° Comece a implementar o Serviço de Imposto
+	.RentalService associado ao BrazilTaxService
+7° Crie uma pasta Services 
+8° Criar a classe BrazilTaxService
+	.Criar a operação Tax e fazer a verificação de valor
+9° Cirar a classe RentalService
+	.Fazer a importação da pasta Entities - Vai utilizar a classe CarRental adiante
+	.Faça a restrição de acesso ao valores/propriedades
+	.Faça a operação ProcessInvoice recebendo o CarRental
