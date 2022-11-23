@@ -53,3 +53,16 @@ PASSO A PASSO
 	.Fazer a importação da pasta Entities - Vai utilizar a classe CarRental adiante
 	.Faça a restrição de acesso ao valores/propriedades
 	.Faça a operação ProcessInvoice recebendo o CarRental
+10° Fazer uma dependência do RentalService para o BrazilTaxService
+	.Criar um private do BrazilTaxService e fazer a instanciação
+	.Implementar o ProcessInvoice
+		.Tirar a diferença entre a data de entrega e o data de entrada
+		.Calcular o pagamento básico
+			.Se essa duração for até 12h fazer o pagamento por horas
+			.Não se esqueça de arredondar pra cima as horas/dias
+		.Calcular o valor do imposto calculado pelo serviço de imposto (brazilTaxService)
+			.Crie uma variável recebendo o serviço de imposto da quantidade basicPayment
+	.Faça a instanciação do Invoice associado ao carRantal
+11° Fazer a interação com o usuário
+12° Faça a instanciação do RentalService recebendo as horas e o dia
+	.Chame o rentalService passando o alugel 
